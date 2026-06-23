@@ -22,14 +22,14 @@ module.exports = async (req, res) => {
               name: 'Spende – KFZ Marburg',
               description: name ? `Spende von ${name}` : 'Anonyme Spende',
             },
-            unit_amount: amount * 100,
+            unit_amount: amount * 100, // Stripe erwartet Cent
           },
           quantity: 1,
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.BASE_URL}?success=1&amount=${amount}&name=${encodeURIComponent(name || 'Anonym')}`,
-      cancel_url: `${process.env.BASE_URL}?cancelled=1`,
+      success_url: `${process.env.BASE_URL}/danke.html?success=1&amount=${amount}&name=${encodeURIComponent(name || 'Anonym')}`,
+      cancel_url: `${process.env.BASE_URL}/danke.html?cancelled=1`,
     });
 
     res.status(200).json({ url: session.url });
