@@ -10,7 +10,15 @@
       "dest": "/api/webhook.js"
     },
     {
-      "src": "/(.*)",
+      "src": "/api/stats",
+      "dest": "/api/stats.js"
+    },
+    {
+      "src": "/danke.html",
+      "dest": "/danke.html"
+    },
+    {
+      "src": "/",
       "dest": "/index.html"
     }
   ]
