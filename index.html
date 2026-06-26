@@ -135,10 +135,29 @@
   </div>
 </div>
 <script>
-  const state = { currentAmount: 500, goalAmount: 1500, donorCount: 77, selectedAmount: 10 };
+  const state = { currentAmount: 0, goalAmount: 1500, donorCount: 0, selectedAmount: 10 };
+
+  function loadStats() {
+    fetch('/api/stats')
+      .then(r => r.json())
+      .then(data => {
+        state.currentAmount = data.total_amount;
+        state.donorCount = data.donor_count;
+        state.goalAmount = data.goal_amount;
+        updateProgress();
+        setTimeout(() => {
+          document.getElementById('progress-fill').style.width =
+            (state.currentAmount / state.goalAmount * 100) + '%';
+        }, 300);
+      })
+      .catch(() => updateProgress());
+  }
+
+  // Alle 30 Sekunden aktualisieren
+  setInterval(loadStats, 30000);
 
   function init() {
-    updateProgress();
+    loadStats();
     setTimeout(() => {
       document.getElementById('progress-fill').style.width = (state.currentAmount / state.goalAmount * 100) + '%';
     }, 300);
