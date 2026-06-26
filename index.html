@@ -30,12 +30,12 @@
   .progress-meta { display: flex; justify-content: space-between; font-size: 13px; }
   .progress-missing { color: var(--text-muted); font-size: 14px; }
   .progress-missing strong, .progress-donors strong { color: var(--gold); font-weight: 500; }
-  .goal-reached { display: none; margin: 0 28px 20px; padding: 20px; background: rgba(254,238,2,0.08); border: 1px solid rgba(254,238,2,0.3); border-radius: 8px; text-align: center; }
-  .goal-reached-emoji { font-size: 32px; margin-bottom: 8px; }
-  .goal-reached-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
-  .goal-reached-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
-  .goal-reached-btn { display: inline-block; background: transparent; border: 1px solid var(--gold); border-radius: 6px; color: var(--gold); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 24px; text-decoration: none; transition: all 0.15s ease; }
-  .goal-reached-btn:hover { background: var(--gold); color: #111110; }
+  .goal-reached { display: none; margin: 0; padding: 32px 28px; background: rgba(254,238,2,0.06); border-top: 1px solid rgba(254,238,2,0.2); border-bottom: 1px solid rgba(254,238,2,0.2); text-align: center; }
+  .goal-reached-emoji { font-size: 40px; margin-bottom: 12px; display: block; }
+  .goal-reached-title { font-family: 'Anton', sans-serif; font-size: 28px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 12px; line-height: 1.1; }
+  .goal-reached-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; max-width: 340px; margin-left: auto; margin-right: auto; margin-bottom: 24px; }
+  .goal-reached-btn { display: inline-block; background: var(--gold); border: none; border-radius: 6px; color: #111110; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 28px; text-decoration: none; transition: all 0.15s ease; }
+  .goal-reached-btn:hover { background: #ffc91a; transform: translateY(-1px); }
   .progress-donors { color: var(--text-muted); }
   .form-section { padding: 24px 28px 28px; }
   .form-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 10px; }
@@ -96,7 +96,7 @@
       <span class="progress-donors"><strong id="donor-count">77</strong> Spenden</span>
     </div>
   </div>
-  <div class="form-section">
+  <div class="form-section" id="form-section">
     <label class="form-label">Betrag wählen</label>
     <div class="amount-grid">
       <button class="amount-btn" data-amount="5">5 €</button>
@@ -199,11 +199,14 @@
     document.getElementById('progress-fill').style.width = pct + '%';
     // Ziel erreicht?
     const goalReached = document.getElementById('goal-reached');
+    const formSection = document.getElementById('form-section');
     if (state.currentAmount >= state.goalAmount) {
       goalReached.style.display = 'block';
-      document.getElementById('progress-fill').style.boxShadow = '0 0 12px rgba(254,238,2,0.6)';
+      if (formSection) formSection.style.display = 'none';
+      document.getElementById('progress-fill').style.boxShadow = '0 0 14px rgba(254,238,2,0.5)';
     } else {
       goalReached.style.display = 'none';
+      if (formSection) formSection.style.display = 'block';
       document.getElementById('progress-fill').style.boxShadow = 'none';
     }
   }
