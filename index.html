@@ -25,11 +25,17 @@
   .progress-current { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 40px; color: var(--gold); }
   .progress-separator { font-size: 20px; color: var(--text-muted); }
   .progress-goal { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 28px; color: var(--text-muted); }
-  .progress-track { width: 100%; height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; margin-bottom: 12px; }
+  .progress-track { width: 100%; height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; margin-bottom: 12px; position: relative; }
   .progress-fill { height: 100%; background: var(--gold); border-radius: 3px; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); width: 0%; }
   .progress-meta { display: flex; justify-content: space-between; font-size: 13px; }
   .progress-missing { color: var(--text-muted); font-size: 14px; }
   .progress-missing strong, .progress-donors strong { color: var(--gold); font-weight: 500; }
+  .goal-reached { display: none; margin: 0 28px 20px; padding: 20px; background: rgba(254,238,2,0.08); border: 1px solid rgba(254,238,2,0.3); border-radius: 8px; text-align: center; }
+  .goal-reached-emoji { font-size: 32px; margin-bottom: 8px; }
+  .goal-reached-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .goal-reached-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+  .goal-reached-btn { display: inline-block; background: transparent; border: 1px solid var(--gold); border-radius: 6px; color: var(--gold); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 24px; text-decoration: none; transition: all 0.15s ease; }
+  .goal-reached-btn:hover { background: var(--gold); color: #111110; }
   .progress-donors { color: var(--text-muted); }
   .form-section { padding: 24px 28px 28px; }
   .form-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 10px; }
@@ -71,6 +77,13 @@
       <div class="event-artists">DJ Hell, Alina<br>Maibach &amp; Semper (Marburg)</div>
     </div>
   </div>
+  <div class="goal-reached" id="goal-reached">
+    <div class="goal-reached-emoji">🎉</div>
+    <div class="goal-reached-title">Ziel erreicht – ihr seid unglaublich!</div>
+    <p class="goal-reached-text">Dank eurer Spenden können wir dem KFZ Marburg faire DJ-Honorare sichern und unabhängige Kulturarbeit in Marburg weiter möglich machen. Danke an alle Spenderinnen und Spender!</p>
+    <a href="https://www.kfz-marburg.de/jetzt-spenden" target="_blank" class="goal-reached-btn">KFZ Marburg weiter unterstützen</a>
+  </div>
+
   <div class="progress-section">
     <div class="progress-numbers">
       <span class="progress-current" id="current-amount">500 €</span>
@@ -137,6 +150,8 @@
 <script>
   const state = { currentAmount: 0, goalAmount: 1500, donorCount: 0, selectedAmount: 10 };
 
+
+
   function loadStats() {
     fetch('/api/stats')
       .then(r => r.json())
@@ -182,6 +197,15 @@
     document.getElementById('missing-amount').textContent = missing.toLocaleString('de-DE') + ' €';
     document.getElementById('donor-count').textContent = state.donorCount;
     document.getElementById('progress-fill').style.width = pct + '%';
+    // Ziel erreicht?
+    const goalReached = document.getElementById('goal-reached');
+    if (state.currentAmount >= state.goalAmount) {
+      goalReached.style.display = 'block';
+      document.getElementById('progress-fill').style.boxShadow = '0 0 12px rgba(254,238,2,0.6)';
+    } else {
+      goalReached.style.display = 'none';
+      document.getElementById('progress-fill').style.boxShadow = 'none';
+    }
   }
 
   function handleDonate() {
