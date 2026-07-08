@@ -192,7 +192,7 @@
     <div class="progress-numbers">
       <span class="progress-current" id="current-amount">500 €</span>
       <span class="progress-separator">/</span>
-      <span class="progress-goal">2.000 €</span>
+      <span class="progress-goal" id="goal-amount">2.000 €</span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
     <div class="progress-meta">
@@ -331,6 +331,7 @@
     const pct = Math.min(100, (state.currentAmount / state.goalAmount) * 100);
     const missing = Math.max(0, state.goalAmount - state.currentAmount);
     document.getElementById('current-amount').textContent = state.currentAmount.toLocaleString('de-DE') + ' €';
+    document.getElementById('goal-amount').textContent = state.goalAmount.toLocaleString('de-DE') + ' €';
     document.getElementById('missing-amount').textContent = missing.toLocaleString('de-DE') + ' €';
     document.getElementById('donor-count').textContent = state.donorCount;
     document.getElementById('progress-fill').style.width = pct + '%';
