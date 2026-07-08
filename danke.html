@@ -8,7 +8,6 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --gold: #FEEE02;
     --bg: #0f0f0f;
@@ -18,7 +17,6 @@
     --border: rgba(254,238,2,0.2);
     --radius: 6px;
   }
-
   body {
     font-family: 'Barlow', sans-serif;
     background: var(--bg);
@@ -29,7 +27,6 @@
     justify-content: center;
     padding: 2rem 1rem;
   }
-
   .card {
     width: 100%;
     max-width: 480px;
@@ -40,17 +37,14 @@
     animation: fadeUp 0.6s ease both;
     text-align: center;
   }
-
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
   .card-top {
     padding: 40px 32px 28px;
     border-bottom: 1px solid var(--border);
   }
-
   .icon {
     width: 72px;
     height: 72px;
@@ -62,12 +56,10 @@
     margin: 0 auto 20px;
     animation: popIn 0.5s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
-
   @keyframes popIn {
     from { transform: scale(0); opacity: 0; }
     to   { transform: scale(1); opacity: 1; }
   }
-
   .icon svg {
     width: 32px;
     height: 32px;
@@ -77,7 +69,6 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-
   /* cancelled state */
   .icon.cancelled {
     border-color: var(--text-muted);
@@ -85,7 +76,6 @@
   .icon.cancelled svg {
     stroke: var(--text-muted);
   }
-
   h1 {
     font-family: 'Anton', sans-serif;
     font-size: 48px;
@@ -95,11 +85,9 @@
     letter-spacing: -0.01em;
     margin-bottom: 12px;
   }
-
   h1.grey {
     color: var(--text-muted);
   }
-
   .subtitle {
     font-family: 'Barlow', sans-serif;
     font-size: 16px;
@@ -108,7 +96,6 @@
     max-width: 340px;
     margin: 0 auto;
   }
-
   .amount-badge {
     display: inline-block;
     background: rgba(254,238,2,0.12);
@@ -122,12 +109,10 @@
     color: var(--gold);
     letter-spacing: 0.02em;
   }
-
   .card-body {
     padding: 24px 32px;
     border-bottom: 1px solid var(--border);
   }
-
   .info-row {
     display: flex;
     justify-content: space-between;
@@ -136,27 +121,22 @@
     font-size: 14px;
     border-bottom: 1px solid rgba(255,255,255,0.05);
   }
-
   .info-row:last-child {
     border-bottom: none;
   }
-
   .info-label {
     color: var(--text-muted);
   }
-
   .info-value {
     font-weight: 600;
     color: var(--text);
   }
-
   .card-footer {
     padding: 24px 32px;
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
-
   .btn-primary {
     display: block;
     width: 100%;
@@ -174,12 +154,10 @@
     text-decoration: none;
     transition: all 0.15s ease;
   }
-
   .btn-primary:hover {
     background: #ffc91a;
     transform: translateY(-1px);
   }
-
   .btn-secondary {
     display: block;
     width: 100%;
@@ -195,12 +173,10 @@
     text-decoration: none;
     transition: all 0.15s ease;
   }
-
   .btn-secondary:hover {
     border-color: var(--gold);
     color: var(--gold);
   }
-
   .footnote {
     padding: 14px 28px;
     border-top: 1px solid var(--border);
@@ -211,7 +187,6 @@
     justify-content: center;
     gap: 6px;
   }
-
   .footnote svg {
     width: 14px;
     height: 14px;
@@ -223,11 +198,9 @@
 </style>
 </head>
 <body>
-
 <div class="card" id="card">
   <!-- Content injected by JS -->
 </div>
-
 <script>
   // URL-Parameter lesen
   const params = new URLSearchParams(window.location.search);
@@ -235,9 +208,7 @@
   const cancelled = params.get('cancelled') === '1';
   const amount = params.get('amount');
   const name = params.get('name') ? decodeURIComponent(params.get('name')) : 'Anonym';
-
   const card = document.getElementById('card');
-
   if (success) {
     // ── Erfolgreich gespendet ─────────────────────────────────────────────
     card.innerHTML = `
@@ -248,11 +219,10 @@
         <h1>Danke!</h1>
         <p class="subtitle">
           Deine Spende macht den Unterschied.<br>
-          Tiefstrom lebt – auch dank dir!
+          Der Marburger Abend lebt – auch dank dir!
         </p>
         ${amount ? `<div class="amount-badge">${Number(amount).toLocaleString('de-DE')} €</div>` : ''}
       </div>
-
       <div class="card-body">
         <div class="info-row">
           <span class="info-label">Spender/in</span>
@@ -265,25 +235,22 @@
         </div>` : ''}
         <div class="info-row">
           <span class="info-label">Verwendungszweck</span>
-          <span class="info-value">Faire DJ-Honorare</span>
+          <span class="info-value">Marburger Abend</span>
         </div>
         <div class="info-row">
           <span class="info-label">Veranstaltung</span>
-          <span class="info-value">341. Marburger Abend</span>
+          <span class="info-value">344. Marburger Abend</span>
         </div>
       </div>
-
       <div class="card-footer">
         <a href="/" class="btn-primary">Weitere Spende</a>
         <a href="/" class="btn-secondary">Zurück zur Übersicht</a>
       </div>
-
       <div class="footnote">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-        Alle Einnahmen fließen direkt in faire DJ-Honorare.
+        Alle Einnahmen fließen direkt in den Marburger Abend.
       </div>
     `;
-
     // Konfetti!
     setTimeout(() => {
       const end = Date.now() + 2500;
@@ -294,7 +261,6 @@
         if (Date.now() < end) requestAnimationFrame(frame);
       }());
     }, 400);
-
   } else if (cancelled) {
     // ── Abgebrochen ───────────────────────────────────────────────────────
     card.innerHTML = `
@@ -308,17 +274,14 @@
           Kein Geld wurde abgebucht.
         </p>
       </div>
-
       <div class="card-footer">
         <a href="/" class="btn-primary">Nochmal versuchen</a>
       </div>
-
       <div class="footnote">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
         Es wurde kein Betrag abgebucht.
       </div>
     `;
-
   } else {
     // ── Fallback (direkt aufgerufen) ──────────────────────────────────────
     card.innerHTML = `
@@ -327,7 +290,7 @@
           <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
         </div>
         <h1>KFZ Marburg</h1>
-        <p class="subtitle">341. Marburger Abend – Spendenmodul</p>
+        <p class="subtitle">344. Marburger Abend – Spendenmodul</p>
       </div>
       <div class="card-footer">
         <a href="/" class="btn-primary">Zur Spendenübersicht</a>
