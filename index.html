@@ -282,9 +282,9 @@
     const naturalWidth = rect.width;
     const naturalHeight = rect.height;
 
-    // kleiner Sicherheitsrand wegen TV-Overscan
-    const availableWidth = window.innerWidth * 0.96;
-    const availableHeight = window.innerHeight * 0.94;
+    // kleiner Sicherheitsrand wegen TV-/Beamer-Overscan (oben/unten etwas großzügiger)
+    const availableWidth = window.innerWidth * 0.94;
+    const availableHeight = window.innerHeight * 0.82;
 
     const scale = Math.min(availableWidth / naturalWidth, availableHeight / naturalHeight);
 
