@@ -12,14 +12,14 @@ module.exports = async (req, res) => {
     res.status(200).json({
       total_amount: Number(total),
       donor_count: Number(count),
-      goal_amount: 1500,
+      goal_amount: 1600,
     });
   } catch (err) {
     console.error('Redis error:', err);
     res.status(200).json({
       total_amount: 0,
       donor_count: 0,
-      goal_amount: 1500,
+      goal_amount: 1600,
     });
   }
 };
